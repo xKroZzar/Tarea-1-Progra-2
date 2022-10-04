@@ -5,27 +5,21 @@ import java.util.Date;
 class OrdenCompra{
     private Date fecha;
     private String estado;
-    Cliente cliente;
-    OrdenCompra(Date x, String d, String Nombre, String Rut, String Dic){ // Se crea una orden de compra con fecha, estado y se asocia (Se hace un new cliente) a un cliente.
-        fecha = x;                                                        // y cada cliente nuevo tiene su Nombre, rut y dirección.      
-        estado = d;
-        cliente= new Cliente(Nombre,Rut,Dic);
+    OrdenCompra(Date a, String b, Cliente d){
+        fecha = a;                                                             
+        estado = b;
     }
     void detalles(){
-        System.out.println(fecha+" "+ estado + " " + cliente.Detalles());
     }
 }
 class Cliente{
     private String nombre;
     private String rut;
     private Direccion dic;
-    Cliente(String x, String d, String c){
-        nombre=x;
-        rut=d;
-        dic= new Direccion(c);
-    }
-    String Detalles(){
-       return nombre+" "+rut; 
+    Cliente(String a, String b, Direccion c){
+        nombre=a;
+        rut=b;
+        dic=c;
     }
 }
 class Direccion{
@@ -33,19 +27,45 @@ class Direccion{
     Direccion(String x){
         direccion = x;
     }
-    String Detalles(){
-        return direccion;
+}class DocTributario{
+    private String numero;
+    private String rut;
+    private Date fecha;
+    DocTributario(String a,String b, Date c,Direccion d){
+        numero=a;
+        rut=b;
+        fecha=c;
+    }
+}class Boleta extends DocTributario{
+    Boleta(String a,String b, Date c, Direccion d){
+        super(a,b,c,d);
     }
 }
-
+class Factura extends DocTributario{
+    Factura(String a, String b, Date c, Direccion d){
+        super(a,b,c,d);
+    }
+}
+class Pago{
+    private float monto;
+    private Date fecha;
+    Pago(Float a, Date b){
+        monto=a;
+        fecha=b;
+    }  
+}
+class Efectivo extends Pago{}    // Maquetas, terminar cuando terminemos de crear articulos y Detalle orden
+class Traferencia extends Pago{}
+class Tarjeta extends Pago{}
 
 public class Clasestarea1 {
 
    
     public static void main(String[] args) {
-      Date fecha= new Date(2021,9,20);
-      OrdenCompra Mercadolibre = new OrdenCompra(fecha, "enviado", "Cristobal", "20732101k", "ohiggins");
-      Mercadolibre.detalles();
+        Date fecha = new Date(1021,9,29);
+        Direccion dic1 = new Direccion("ohiggns");
+        Cliente us1= new Cliente("Raul","Figueroa",dic1);
+        
     }
     
 }
