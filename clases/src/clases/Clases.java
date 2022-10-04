@@ -1,5 +1,5 @@
 
-package clasestarea1;
+package clases;
 import java.util.Date;
 import java.util.ArrayList; 
 class OrdenCompra{
@@ -95,12 +95,9 @@ class Efectivo extends Pago{}    // Maquetas, terminar cuando terminemos de crea
 class Traferencia extends Pago{}
 class Tarjeta extends Pago{}
 */
-public class Clasestarea1 {
-
-   
+public class Clases {
     public static void main(String[] args) {
-        Articulo Papelbaño = new Articulo(50,"cosas del hogar","Ropa",(float)100.5);
-       Papelbaño.r();
+       
     }
     
 }
