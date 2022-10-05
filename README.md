@@ -29,6 +29,6 @@
 <p> Metodo para ingregar el tipo de pago y recibir una boleta o factura de vuelta. </p>
 
 ## Información Importante
-[!][Uml](/images/UML.png)
-[!][Enunciado](/images/Enunciado.png)
+[![Uml](/images/UML.png)
+[![Enunciado](/images/Enunciado.png)
 
