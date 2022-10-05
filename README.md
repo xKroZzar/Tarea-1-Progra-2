@@ -1,7 +1,11 @@
 # Tarea 1 Programación 2
 
 :construction: Proyecto no terminado :construction:
-<p> Proyecto en github para resolver la **tarea dada** .</p>
+<p> Proyecto en github para resolver la tarea dada .</p>
+
+## Información de los participantes
+- Cristóbal Figueroa (xKroZzar).
+- ???
 
 ## Objetivos a cumplir
 
