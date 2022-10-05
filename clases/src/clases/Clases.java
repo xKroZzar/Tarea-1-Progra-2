@@ -4,10 +4,21 @@ import java.util.ArrayList;
 class OrdenCompra{
     private Date fecha;
     private String estado;
-    OrdenCompra(Date a, String b, Cliente d,int c){
-        fecha = a;
-        estado = b;
-    }    
+    public ArrayList<DetalleOrden> ordenes;
+    public Cliente cliente;
+    OrdenCompra(Date a,String b,Cliente c){
+        fecha=a;
+        estado=b;
+        cliente=c;
+        ordenes= new ArrayList<DetalleOrden>();
+    }
+    void agregarArticulo(int a,Articulo b){
+        DetalleOrden nuevoArticulo = new DetalleOrden(a,b);
+        ordenes.add(nuevoArticulo);
+    }
+    void tamaño(){
+        System.out.println(ordenes.size());
+    }
 }
 class Articulo{
     private float peso;
@@ -23,7 +34,9 @@ class Articulo{
     float entregarprecio(){
         return precio;
     }
-    
+    float entregarpeso(){
+        return peso;
+    }
 }
 class DetalleOrden{
     private int cantidad;
@@ -33,7 +46,16 @@ class DetalleOrden{
         copia = b;
     }
     void calcPrecio(){
+        System.out.println((cantidad*copia.entregarprecio())+cantidad*copia.entregarprecio()*0.19);
+    }
+    void calcPrecioSinIva(){
         System.out.println(cantidad*copia.entregarprecio());
+    }
+    void calcIva(){
+        System.out.println(cantidad*copia.entregarprecio()*0.19);
+    }
+    void calcPeso(){
+        System.out.println(cantidad*copia.entregarpeso());
     }
 }
 class Cliente{
@@ -79,13 +101,45 @@ class Pago{
         fecha=b;
     }  
 }
-/*
-class Efectivo extends Pago{}    // Maquetas, terminar cuando terminemos de crear articulos y Detalle orden
-class Traferencia extends Pago{}
-class Tarjeta extends Pago{}
-*/
+
+class Efectivo extends Pago{
+    Efectivo(float a, Date b){
+        super(a,b);
+    }
+    void calcDevolucion(){
+    
+    }
+} 
+class Transferencia extends Pago{
+    private String banco;
+    private String numCuenta;
+    Transferencia(float a, Date b, String ba, String num){
+        super(a,b);
+        banco=ba;
+        numCuenta=num;
+    }
+}
+class Tarjeta extends Pago{
+    private String tipo;
+    private String numTransaccion;
+    Tarjeta(float a, Date b, String t, String n){
+        super(a,b);
+        tipo=t;
+        numTransaccion=n;
+    }
+}
 
 public class Clases {
-    public static void main(String[] args) {  
-    }    
+    public static void main(String[] args) {
+        Articulo Polera = new Articulo((float)50.5,"Ropa","ropa comoda",(float)1000);
+        Articulo Zapatilla = new Articulo((float)12.5,"Zapatillas","zapatillas dc",(float)1000);
+        Direccion casa = new Direccion("Cochrane");
+        Cliente cliente1= new Cliente("Raul Figueroa","19.200.333-k",casa);
+        Date fecha = new Date();
+        OrdenCompra compra1ra = new OrdenCompra(fecha,"Enviado",cliente1);
+        compra1ra.agregarArticulo(2, Polera);
+        compra1ra.agregarArticulo(1,Zapatilla);
+        compra1ra.tamaño();
+        
+    }  
 }
