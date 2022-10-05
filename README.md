@@ -1,4 +1,4 @@
-﻿<em> # Tarea 1 Programación 2 </em>
+<em> # Tarea 1 Programación 2 </em>
 
 :construction: Proyecto no terminado :construction:
 
