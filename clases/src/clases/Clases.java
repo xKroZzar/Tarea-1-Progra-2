@@ -6,6 +6,7 @@ class OrdenCompra{
     private String estado;
     public ArrayList<DetalleOrden> ordenes;
     public Cliente cliente;
+    public float totalIva;
     OrdenCompra(Date a,String b,Cliente c){
         fecha=a;
         estado=b;
@@ -16,9 +17,26 @@ class OrdenCompra{
         DetalleOrden nuevoArticulo = new DetalleOrden(a,b);
         ordenes.add(nuevoArticulo);
     }
+    void actualizarEstado(String a){
+        estado=a;
+    }
     void tamaño(){
         System.out.println(ordenes.size());
     }
+    void calcPrecio(){
+        for(int i = 0; i < ordenes.size(); i++) {
+            ordenes.get(0).calcPrecio();
+        }
+    
+    }
+    void calcIva(){
+        for (int i = 0; i < ordenes.size(); i++) {
+                totalIva=totalIva+ordenes.get(i).calcIva();
+        }
+        System.out.println(totalIva);
+    }
+    void calcPrecioSinIva(){}
+    void calcPeso(){}
 }
 class Articulo{
     private float peso;
@@ -51,8 +69,8 @@ class DetalleOrden{
     void calcPrecioSinIva(){
         System.out.println(cantidad*copia.entregarprecio());
     }
-    void calcIva(){
-        System.out.println(cantidad*copia.entregarprecio()*0.19);
+    float calcIva(){
+        return (float)(cantidad*copia.entregarprecio()*0.19);
     }
     void calcPeso(){
         System.out.println(cantidad*copia.entregarpeso());
@@ -137,9 +155,9 @@ public class Clases {
         Cliente cliente1= new Cliente("Raul Figueroa","19.200.333-k",casa);
         Date fecha = new Date();
         OrdenCompra compra1ra = new OrdenCompra(fecha,"Enviado",cliente1);
-        compra1ra.agregarArticulo(2, Polera);
+        compra1ra.agregarArticulo(1, Polera);
         compra1ra.agregarArticulo(1,Zapatilla);
         compra1ra.tamaño();
-        
+        compra1ra.calcIva();
     }  
 }
