@@ -9,5 +9,6 @@
 - [ ] Meta 2: Terminar todas las propiedades.
 
 ## Información Importante
-[![Uml](https://ibb.co/wpPfMgC "Uml")](http://https://ibb.co/wpPfMgC "Uml")
-[![Enunciado](mi casa "Enunciado")](https://ibb.co/yYhsQPP "Enunciado")
+[![Uml](/images/UML.png)
+[![Enunciado](/images/Enunciado.png)
+
