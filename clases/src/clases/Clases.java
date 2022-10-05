@@ -6,9 +6,9 @@ class OrdenCompra{
     private String estado;
     public ArrayList<DetalleOrden> ordenes;
     public Cliente cliente;
-    public float totalIva;
+    public float totalIva,totalsinIva,totalPeso,totalPrecio;
     OrdenCompra(Date a,String b,Cliente c){
-        fecha=a;
+        fecha=a; 
         estado=b;
         cliente=c;
         ordenes= new ArrayList<DetalleOrden>();
@@ -20,23 +20,45 @@ class OrdenCompra{
     void actualizarEstado(String a){
         estado=a;
     }
-    void tamaño(){
-        System.out.println(ordenes.size());
-    }
-    void calcPrecio(){
-        for(int i = 0; i < ordenes.size(); i++) {
-            ordenes.get(0).calcPrecio();
+    DocTributario Pagar(Pago x,int d,String a,String b, Date c,Direccion f){
+        switch(d){
+            case 1:
+                Boleta boleta = new Boleta(a,b,c,f);
+                return boleta;
+            case 2:
+                Factura factura= new Factura(a,b,c,f);
+                return factura;
+            default:
+                System.out.println("Porfavor reintente nuevamente, 1 para Boleta, 2 para factura");
+                return null;
+        
+        
         }
-    
     }
-    void calcIva(){
+    float calcPrecio(){
+        for(int i = 0; i < ordenes.size(); i++) {
+            totalPrecio=totalPrecio+ordenes.get(i).calcPrecio();
+        }
+        return totalPrecio;
+    }
+    float calcIva(){
         for (int i = 0; i < ordenes.size(); i++) {
                 totalIva=totalIva+ordenes.get(i).calcIva();
         }
-        System.out.println(totalIva);
+        return totalIva;
     }
-    void calcPrecioSinIva(){}
-    void calcPeso(){}
+    float calcPrecioSinIva(){
+        for (int i = 0; i < ordenes.size(); i++) {
+                totalsinIva=totalsinIva+ordenes.get(i).calcPrecioSinIva();
+        }
+        return totalsinIva;
+    }
+    float calcPeso(){
+        for (int i = 0; i < ordenes.size(); i++) {
+                totalPeso=totalPeso+ordenes.get(i).calcPeso();
+        }
+       return totalPeso;
+    }
 }
 class Articulo{
     private float peso;
@@ -63,17 +85,17 @@ class DetalleOrden{
         cantidad=a;
         copia = b;
     }
-    void calcPrecio(){
-        System.out.println((cantidad*copia.entregarprecio())+cantidad*copia.entregarprecio()*0.19);
+    float calcPrecio(){
+        return (float)((cantidad*copia.entregarprecio())+cantidad*copia.entregarprecio()*0.19);
     }
-    void calcPrecioSinIva(){
-        System.out.println(cantidad*copia.entregarprecio());
+    float calcPrecioSinIva(){
+        return (float)(cantidad*copia.entregarprecio());
     }
     float calcIva(){
         return (float)(cantidad*copia.entregarprecio()*0.19);
     }
-    void calcPeso(){
-        System.out.println(cantidad*copia.entregarpeso());
+    float calcPeso(){
+        return (float)(cantidad*copia.entregarpeso());
     }
 }
 class Cliente{
@@ -121,13 +143,19 @@ class Pago{
 }
 
 class Efectivo extends Pago{
+    private float devol;
     Efectivo(float a, Date b){
         super(a,b);
+        devol=a;
     }
-    void calcDevolucion(){
-    
-    }
-} 
+    void calcDevolucion(OrdenCompra x){
+        System.out.println("aki tamos "+x.calcPrecio());
+       if(devol > x.calcPrecio()){
+          System.out.println("El monto a devolver es de: "+(devol-x.calcPrecio()));
+        }
+ 
+    } 
+}
 class Transferencia extends Pago{
     private String banco;
     private String numCuenta;
@@ -154,10 +182,12 @@ public class Clases {
         Direccion casa = new Direccion("Cochrane");
         Cliente cliente1= new Cliente("Raul Figueroa","19.200.333-k",casa);
         Date fecha = new Date();
+        Efectivo billetes = new Efectivo(10000,fecha);
         OrdenCompra compra1ra = new OrdenCompra(fecha,"Enviado",cliente1);
-        compra1ra.agregarArticulo(1, Polera);
-        compra1ra.agregarArticulo(1,Zapatilla);
-        compra1ra.tamaño();
-        compra1ra.calcIva();
+        compra1ra.agregarArticulo(5, Polera);
+        compra1ra.agregarArticulo(3,Zapatilla);
+        System.out.println(compra1ra.calcPrecio());
+        compra1ra.Pagar(billetes, 1, "20202020", "22", fecha, casa);
+        billetes.calcDevolucion(compra1ra);
     }  
 }
