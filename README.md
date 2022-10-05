@@ -10,7 +10,12 @@
 ## Objetivos a cumplir
 
 - [x] Meta 1: Terminar todas las clases.
-- [ ] Meta 2: Terminar todas las propiedades.
+- [x] Meta 2: Terminar todas las propiedades.
+- [ ] Meta 3: Crear metodo pagar.
+
+### Ideas
+
+- Agregar un metodo pagar donde se ingrese el monto y que te devuelva una factura.
 
 ## Información Importante
 [![Uml](/images/UML.png)
