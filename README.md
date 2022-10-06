@@ -17,6 +17,17 @@
 
 - Agregar un metodo pagar donde se ingrese el monto y que te devuelva una factura.
 
+## Metodos Agregados y explicacion
+- agregarArticulo();
+<p> Se utiliza para agregar un articulo creado en la OrdenCompra y se le anexa un DetalleOrden unico, y esté a la vez </p>
+<p> es agregado a un ArrayList. </p>
+
+- actualizarEstado();
+<p> Como dice su nombre actualiza el estado de la OrdenCompra </p>
+
+- pagar();
+<p> Metodo para ingregar el tipo de pago y recibir una boleta o factura de vuelta. </p>
+
 ## Información Importante
 [![Uml](/images/UML.png)
 [![Enunciado](/images/Enunciado.png)
