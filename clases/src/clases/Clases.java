@@ -6,7 +6,7 @@ class OrdenCompra{
     private String estado;
     public ArrayList<DetalleOrden> ordenes;
     public Cliente cliente;
-    public float totalIva,totalsinIva,totalPeso,totalPrecio;
+    public float totalIva,totalsinIva,totalPeso,totalPrecio,totaldevolver;
     OrdenCompra(Date a,String b,Cliente c){
         fecha=a; 
         estado=b;
@@ -39,7 +39,9 @@ class OrdenCompra{
         for(int i = 0; i < ordenes.size(); i++) {
             totalPrecio=totalPrecio+ordenes.get(i).calcPrecio();
         }
-        return totalPrecio;
+        totaldevolver=totalPrecio;
+        totalPrecio=0;
+        return totaldevolver;
     }
     float calcIva(){
         for (int i = 0; i < ordenes.size(); i++) {
@@ -149,10 +151,12 @@ class Efectivo extends Pago{
         devol=a;
     }
     void calcDevolucion(OrdenCompra x){
-        System.out.println("aki tamos "+x.calcPrecio());
        if(devol > x.calcPrecio()){
           System.out.println("El monto a devolver es de: "+(devol-x.calcPrecio()));
-        }
+       }else{
+        System.out.println("Monto insuficiente");
+       
+       }
  
     } 
 }
@@ -182,12 +186,12 @@ public class Clases {
         Direccion casa = new Direccion("Cochrane");
         Cliente cliente1= new Cliente("Raul Figueroa","19.200.333-k",casa);
         Date fecha = new Date();
-        Efectivo billetes = new Efectivo(10000,fecha);
+        Efectivo billetes = new Efectivo(5000,fecha);
         OrdenCompra compra1ra = new OrdenCompra(fecha,"Enviado",cliente1);
         compra1ra.agregarArticulo(5, Polera);
-        compra1ra.agregarArticulo(3,Zapatilla);
-        System.out.println(compra1ra.calcPrecio());
+        compra1ra.agregarArticulo(1,Zapatilla);
         compra1ra.Pagar(billetes, 1, "20202020", "22", fecha, casa);
+        System.out.println(compra1ra.calcPrecio());
         billetes.calcDevolucion(compra1ra);
     }  
 }
