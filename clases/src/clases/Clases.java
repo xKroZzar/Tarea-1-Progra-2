@@ -20,21 +20,24 @@ class OrdenCompra{
     void actualizarEstado(String a){
         estado=a;
     }
-    DocTributario Pagar(Pago x,int d,String a,String b, Date c,Direccion f){
-        switch(d){
-            case 1:
-                Boleta boleta = new Boleta(a,b,c,f);
-                return boleta;
-            case 2:
-                Factura factura= new Factura(a,b,c,f);
-                return factura;
-            default:
-                System.out.println("Porfavor reintente nuevamente, 1 para Boleta, 2 para factura");
-                return null;
-        
-        
-        }
+    void Pagar(Pago x){
+                   
     }
+    DocTributario generarDoc(String a,String b, Date c,Direccion d, int e){
+        switch(e){
+            case 1:
+                Boleta bol = new Boleta(a,b,c,d);
+                return bol;
+            case 2:
+                Factura fac = new Factura (a,b,c,d);
+                return fac;
+            default:
+                System.out.println("Error, marque 1 o 2 para boleta o factura respectivamente");
+                return null;
+        }
+    
+    }
+    
     float calcPrecio(){
         for(int i = 0; i < ordenes.size(); i++) {
             totalPrecio=totalPrecio+ordenes.get(i).calcPrecio();
@@ -181,17 +184,27 @@ class Tarjeta extends Pago{
 
 public class Clases {
     public static void main(String[] args) {
-        Articulo Polera = new Articulo((float)50.5,"Ropa","ropa comoda",(float)1000);
-        Articulo Zapatilla = new Articulo((float)12.5,"Zapatillas","zapatillas dc",(float)1000);
-        Direccion casa = new Direccion("Cochrane");
-        Cliente cliente1= new Cliente("Raul Figueroa","19.200.333-k",casa);
-        Date fecha = new Date();
-        Efectivo billetes = new Efectivo(5000,fecha);
-        OrdenCompra compra1ra = new OrdenCompra(fecha,"Enviado",cliente1);
-        compra1ra.agregarArticulo(5, Polera);
-        compra1ra.agregarArticulo(1,Zapatilla);
-        compra1ra.Pagar(billetes, 1, "20202020", "22", fecha, casa);
-        System.out.println(compra1ra.calcPrecio());
-        billetes.calcDevolucion(compra1ra);
+       Date fecha = new Date();
+       Efectivo Pesos = new Efectivo((float)10000,fecha);
+       Direccion Casa = new Direccion("Ohiggins 1504");
+       Direccion MiCasa = new Direccion("Lomas San Sebastian");
+       Cliente cliente = new Cliente("Miguel Rodriguez","19.203.232-k",Casa);
+       Cliente cliente1= new Cliente("Nicolas Dominic","20.732.232-9",MiCasa);
+       OrdenCompra Paris = new OrdenCompra(fecha,"Pidiendo",cliente);
+       OrdenCompra MallDelTrebol = new OrdenCompra(fecha,"Pagar",cliente1);
+       Articulo polera1 = new Articulo((float)0.23,"Polera Dc","Polera Dc negra manga corta",(float)2000);
+       Articulo Zapatilla1 = new Articulo((float)0.52,"Zapatilla DC","Zapatilla Dc x Starwars",(float)7400);
+       Articulo polera2 = new Articulo((float)0.25,"Polera Gap","Polera Gap negra manga larga",(float)2400);
+       Articulo Tecnologia = new Articulo((float)25,"Televisor Sony","Televisor Sony 300 pulgadas",(float)1400);
+       Paris.agregarArticulo(1, polera1);
+       Paris.agregarArticulo(1,Zapatilla1);
+       MallDelTrebol.agregarArticulo(1, Tecnologia);
+       MallDelTrebol.agregarArticulo(1, polera2);
+       Pesos.calcDevolucion(Paris);
+       Pesos.calcDevolucion(MallDelTrebol);
+       Paris.Pagar(Pesos);
+       MallDelTrebol.Pagar(Pesos);
+       DocTributario factura = Paris.generarDoc("a", "b",fecha, Casa, 2);
+       
     }  
 }
