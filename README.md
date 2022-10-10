@@ -7,11 +7,15 @@
 - Cristóbal Figueroa (xKroZzar).
 - ???
 
+## MENSAJE A LEER!!
+Las clases por complicaciones no las pude separar!, para la proxima tarea no sucedera lo mismo,
+pido un poquito de piedad, gracias de antemano!!
+
 ## Objetivos a cumplir
 
 - [x] Meta 1: Terminar todas las clases.
 - [x] Meta 2: Terminar todas las propiedades.
-- [ ] Meta 3: Crear metodo pagar.
+- [x] Meta 3: Crear metodo pagar.
 
 ### Ideas
 
